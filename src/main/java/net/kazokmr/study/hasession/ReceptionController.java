@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.LocalDateTime;
 
 @RestController
 public class ReceptionController {
@@ -23,7 +22,7 @@ public class ReceptionController {
     public String hello() throws UnknownHostException {
         if (reception.getReceptionAt() == null) {
             reception.setHost(InetAddress.getLocalHost().getHostName());
-            reception.setReceptionAt(LocalDateTime.now());
+            reception.setReceptionAt();
             reception.setMessage("セッション開始");
         } else {
             reception.setMessage("セッション中");
