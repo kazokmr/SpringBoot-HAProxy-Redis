@@ -3,17 +3,31 @@ version: '3'
 services:
   haproxy:
     build: ./haproxy
+    depends_on:
+      - app01
+      - app02
+      - app03
     ports:
       - 80:80
+
+  redis:
+    container_name: redis
+    image: redis
 
   app01:
     image: sessiontest:latest
     hostname: docker-container-1
+    depends_on:
+      - redis
 
   app02:
     image: sessiontest:latest
     hostname: docker-container-2
+    depends_on:
+      - redis
 
   app03:
     image: sessiontest:latest
     hostname: docker-container-3
+    depends_on:
+      - redis
